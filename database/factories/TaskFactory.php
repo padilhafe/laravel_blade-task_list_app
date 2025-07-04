@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\TaskStatus;
+use App\TaskPriority;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
@@ -19,8 +22,12 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->sentence,
             'description' => fake()->paragraph,
-            'long_description' => fake()->paragraph(7, true),
-            'completed' => fake()->boolean,
+            'status' => fake()->randomElement(TaskStatus::cases()),
+            'priority' => fake()->randomElement(TaskPriority::cases()),
+            'due_date' => fake()->dateTimeBetween(
+                startDate: now(),
+                endDate: now()->addDays(30)
+            ),
         ];
     }
 }

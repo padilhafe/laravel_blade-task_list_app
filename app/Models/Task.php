@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\TaskStatus;
+use App\TaskPriority;
 
 class Task extends Model
 {
@@ -12,12 +14,14 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'long_description',
+        'status',
+        'priority',
+        'due_date',
     ];
 
-    public function toggleComplete()
-    {
-        $this->completed = !$this->completed;
-        $this->save();
-    }
+    protected $casts = [
+        'status' => TaskStatus::class,
+        'priority' => TaskPriority::class,
+        'due_date' => 'datetime',
+    ];
 }
