@@ -12,4 +12,10 @@
             There are no tasks!
         </div>
     @endforelse
+
+    @if ($tasks->count())
+    <pagination>
+        {{ $tasks->links() }}
+    </pagination>
+    @endif
 @endsection

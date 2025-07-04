@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Requests\TaskRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Route;
 use App\Models\Task;
 
@@ -11,7 +10,7 @@ Route::get('/', function () {
 
 Route::get('/tasks', function () {
     return view('index', [
-        'tasks' => Task::latest()->get(),
+        'tasks' => Task::latest()->paginate(10),
     ]);
 })->name('tasks.index');
 
